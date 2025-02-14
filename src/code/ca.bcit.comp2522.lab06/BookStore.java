@@ -130,10 +130,67 @@ public class BookStore<T extends Literature>
         bookMap.put(item.getTitle(), item);
     }
 
+    /**
+     * Prints the titles of all novels that contain the specified
+     * substring.
+     *
+     * <p>The search is case-insensitive. For each novel in the
+     * collection, if the lowercase version of the title contains the
+     * lowercase version of the provided substring, the title is printed.
+     *
+     * @param substring the substring to search for within novel titles
+     */
+    public void printBookTitle(final String substring)
+    {
+        final String stringToCompare;
+        stringToCompare = substring.toLowerCase();
+
+        bookList.forEach(book -> {
+            final String lowercaseTitle;
+            lowercaseTitle = book.getTitle().toLowerCase();
+            if(lowercaseTitle.contains(stringToCompare))
+            {
+                System.out.println(book.getTitle());
+            }
+        });
+    }
+
     public void printBookList()
     {
         for (T item : bookList) {
             System.out.println(item.getTitle());
+        }
+    }
+
+    /**
+     * Prints all the novel titles in this bookstore in alphabetical
+     * order.
+     *
+     * <p>This method sorts the internal list of novels (using the
+     * natural ordering defined in the {@link Novel} class) and then
+     * prints each title in order.
+     */
+    public void printTitlesInAlphaOrder()
+    {
+        final List<T> sortedNovels;
+        sortedNovels = bookList;
+
+        sortedNovels.sort(String::compareToIgnoreCase);
+
+        bookList.forEach(book -> {
+            System.out.println(book.getTitle());
+        });
+    }
+
+    public void addNovelsToCollection(
+            final List<? super Novel> novelCollection)
+    {
+        for (final T book : bookList)
+        {
+            if (book instanceof Novel)
+            {
+                novelCollection.add((Novel) book);
+            }
         }
     }
 
