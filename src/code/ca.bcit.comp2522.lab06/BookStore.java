@@ -22,6 +22,17 @@ public class BookStore<T extends Literature>
     private final List<T> bookList;
     private final Map<String, T> bookMap;
 
+    // Contains functionality for printing information
+    // about the BookStore.
+    private class BookStoreInfo
+    {
+        public void displayInfo()
+        {
+            System.out.println("Bookstore name: " + name
+                             + "\nAmount of items: " + bookList.size());
+        }
+    }
+
     // Contains functionality for comparing books
     private class novelStatistics
     {
@@ -172,14 +183,16 @@ public class BookStore<T extends Literature>
      */
     public void printTitlesInAlphaOrder()
     {
-        final List<T> sortedNovels;
-        sortedNovels = bookList;
-
-        sortedNovels.sort(String::compareToIgnoreCase);
+        final List<String> listOfTitles;
+        listOfTitles = new ArrayList<String>();
 
         bookList.forEach(book -> {
-            System.out.println(book.getTitle());
+            listOfTitles.add(book.getTitle());
         });
+
+        listOfTitles.sort(String::compareToIgnoreCase);
+
+        listOfTitles.forEach(System.out::println);
     }
 
     public void addNovelsToCollection(
@@ -192,10 +205,5 @@ public class BookStore<T extends Literature>
                 novelCollection.add((Novel) book);
             }
         }
-    }
-
-    public String getName()
-    {
-        return name;
     }
 }
