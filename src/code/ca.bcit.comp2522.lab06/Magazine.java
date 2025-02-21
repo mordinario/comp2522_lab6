@@ -1,10 +1,10 @@
 package ca.bcit.comp2522.lab06;
 
 public class Magazine extends Literature {
-    private String title;
 
-    public Magazine(String title) {
-        this.title = title;
+    public Magazine(final String title,
+                    final int publicationDate) {
+        super(title, publicationDate);
     }
 
     @Override

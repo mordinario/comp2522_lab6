@@ -26,11 +26,11 @@ public abstract class Literature
 
     private void validateTitle(final String unvalidatedTitle)
     {
-        if(title == null)
+        if(unvalidatedTitle == null)
         {
             throw new IllegalArgumentException("Title cannot be null");
         }
-        if(title.isBlank())
+        if(unvalidatedTitle.isBlank())
         {
             throw new IllegalArgumentException("Title cannot be blank");
         }

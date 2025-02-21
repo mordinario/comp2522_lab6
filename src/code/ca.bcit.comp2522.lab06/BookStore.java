@@ -50,6 +50,34 @@ public class BookStore<T extends Literature>
     private final List<T> bookList;
     private final Map<String, T> bookMap;
 
+    // Static nested class
+    static class BookStoreInfo
+    {
+        public void displayInfo(final String storeName,
+                                final int itemCount)
+        {
+            System.out.println("BookStore: " + storeName + ", Items: " + itemCount);
+        }
+    }
+
+    // Non-static inner class
+    class NovelStatistics
+    {
+        public double averageTitleLength()
+        {
+            int totalLength;
+            totalLength = 0;
+
+            for (final T item : bookList)
+            {
+                final String itemTitle = item.getTitle();
+                totalLength += itemTitle.length();
+            }
+
+            return (double) totalLength / bookList.size();
+        }
+    }
+
     /**
      * Constructs a new {@code BookStore} with the specified name.
      *
@@ -112,10 +140,65 @@ public class BookStore<T extends Literature>
      */
     public static void main(final String[] args)
     {
-        final BookStore store;
-        store = new BookStore("The Bookstore");
+        final BookStore<Literature> store;
+        store = new BookStore<Literature>("The Bookstore");
+
+        List<Literature> list = store.getBookList();
+
+        list.sort(new Comparator<>() {
+            @Override
+            public int compare(final Literature o1,
+                               final Literature o2)
+            {
+                final String o1Title = o1.getTitle();
+                final String o2Title = o2.getTitle();
+                return Integer.compare(o1Title.length(), o2Title.length());
+            }
+        });
     }
 
+    /**
+     * Prints the titles of all novels that contain the specified
+     * substring.
+     *
+     * <p>The search is case-insensitive. For each novel in the
+     * collection, if the lowercase version of the title contains the
+     * lowercase version of the provided substring, the title is printed.
+     *
+     * @param substring the substring to search for within novel titles
+     */
+    public void printBookTitle(final String substring)
+    {
+        final String stringToCompare;
+        stringToCompare = substring.toLowerCase();
+
+        bookList.forEach(book -> {
+            final String bookTitle;
+            final String bookTitleLower;
+
+            bookTitle = book.getTitle();
+            bookTitleLower = bookTitle.toLowerCase();
+
+            if (bookTitleLower.contains(stringToCompare))
+            {
+                System.out.println(bookTitle);
+            }
+        });
+    }
+
+    public void printTitlesInAlphaOrder()
+    {
+        List<String> titleList;
+        titleList = new ArrayList<>();
+
+        for(final T book : bookList)
+        {
+            titleList.add(book.getTitle());
+        }
+
+        titleList.sort(String::compareToIgnoreCase);
+        titleList.forEach(System.out::println);
+    }
 
     public void addBook(T item)
     {
@@ -125,8 +208,24 @@ public class BookStore<T extends Literature>
 
     public void printBookList()
     {
-        for (T item : bookList) {
+        for (final T item : bookList) {
             System.out.println(item.getTitle());
         }
+    }
+
+    public void addNovelsToCollection(final List<? super Novel> novelCollection)
+    {
+        for (final T item : bookList)
+        {
+            if (item instanceof Novel)
+            {
+                novelCollection.add((Novel) item);
+            }
+        }
+    }
+
+    public List<T> getBookList()
+    {
+        return bookList;
     }
 }
