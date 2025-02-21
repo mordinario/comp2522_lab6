@@ -1,21 +1,19 @@
 package ca.bcit.comp2522.lab06;
 
-public class ComicBook
-    extends Literature
-{
-    public ComicBook(final String title,
-                     final int yearPublished)
-    {
-        super(title, yearPublished);
+public class ComicBook extends Literature {
+    private String title;
+
+    public ComicBook(String title) {
+        this.title = title;
     }
 
-    public String getTitle()
-    {
-        return super.title;
+    @Override
+    public String getTitle() {
+        return title;
     }
 
-    public int getYearPublished()
-    {
-        return super.yearPublished;
+    @Override
+    int getYearPublished() {
+        return 0;
     }
 }

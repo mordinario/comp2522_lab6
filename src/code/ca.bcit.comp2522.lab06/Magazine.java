@@ -1,21 +1,19 @@
 package ca.bcit.comp2522.lab06;
 
-public class Magazine
-        extends Literature
-{
-    public Magazine(final String title,
-                     final int yearPublished)
-    {
-        super(title, yearPublished);
+public class Magazine extends Literature {
+    private String title;
+
+    public Magazine(String title) {
+        this.title = title;
     }
 
-    public String getTitle()
-    {
-        return super.title;
+    @Override
+    public String getTitle() {
+        return title;
     }
 
-    public int getYearPublished()
-    {
-        return super.yearPublished;
+    @Override
+    int getYearPublished() {
+        return 0;
     }
 }
