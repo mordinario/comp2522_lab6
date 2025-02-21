@@ -5,7 +5,7 @@ public class Main
     public static void main(final String[] args)
     {
         final BookStore<Literature> store;
-        store = new BookStore<>();
+        store = new BookStore<>("The Bookstore");
         store.addBook(new Novel("War and Peace"));
         store.addBook(new ComicBook("Spider-Man"));
         store.addBook(new Magazine("National Geographic"));

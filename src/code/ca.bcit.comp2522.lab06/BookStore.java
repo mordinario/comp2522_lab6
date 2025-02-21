@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * The {@code BookStore} class represents a bookstore that manages
- * a collection of {@link Novel} objects. It provides functionality for
+ * a collection of Novel objects. It provides functionality for
  * populating the store with novels, printing and querying novel titles,
  * and performing various operations such as sorting, filtering, and
  * statistical calculations on the collection.
@@ -80,7 +80,7 @@ public class BookStore<T extends Literature>
         bookList = new ArrayList<>();
 
         // Initializes HashMap
-        bookMap = new HashMap<String, T>();
+        bookMap = new HashMap<>();
 
         for (final T book : bookList)
         {
